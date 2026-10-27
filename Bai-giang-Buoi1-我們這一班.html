@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我們這一班 · Buổi 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=LXGW+WenKai+TC:wght@400;700&display=swap">
+<style>
+/* Layout: projector deck — one full-screen slide at a time, fixed top bar (tiết + progress), fixed bottom toolbar (điều hướng + công cụ).
+   Deliberately light-only so it reads well on classroom projectors. */
+:root{
+  color-scheme:light;
+  --paper:#FBFAF6; --card:#FFFFFF; --ink:#1B2430; --muted:#5E6B78; --line:#DCDDD5;
+  --red:#C8321E; --red-t:#FBE9E5; --blue:#1F5FA8; --blue-t:#E6EFF9; --gold:#E2A21B; --gold-t:#FDF3DC;
+  --green:#22845B; --green-t:#E2F3EA;
+  --f-ui:"Be Vietnam Pro","Noto Sans TC",system-ui,sans-serif;
+  --f-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-kai:"LXGW WenKai TC","BiauKai","DFKai-SB","Noto Sans TC",serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);margin:0;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+input,select{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:6px 10px}
+.zh{font-family:var(--f-zh)} .kai{font-family:var(--f-kai)}
+h1,h2,h3{margin:0;text-wrap:balance}
+[hidden]{display:none!important}
+
+/* top bar */
+.top{position:fixed;inset:0 0 auto;z-index:20;background:var(--ink);color:#fff;
+  padding:calc(env(safe-area-inset-top,0px) + 8px) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;gap:14px}
+.top .brand{font-family:var(--f-kai);font-weight:700;font-size:20px;letter-spacing:.04em}
+.tiets{display:flex;gap:4px;margin-left:auto;overflow-x:auto}
+.tiets button{border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:600;white-space:nowrap}
+.tiets button[aria-current="true"]{background:var(--gold);color:var(--ink)}
+.prog{position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 46px);height:4px;background:var(--line);z-index:20}
+.prog i{display:block;height:100%;background:var(--red);transition:width .3s}
+
+/* stage */
+.stage{position:fixed;inset:calc(env(safe-area-inset-top,0px) + 50px) 0 calc(env(safe-area-inset-bottom,0px) + 62px);overflow:auto}
+.slide{min-height:100%;padding:clamp(18px,3vw,40px) max(16px,env(safe-area-inset-right,0px)) clamp(18px,3vw,40px) max(16px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;gap:clamp(12px,2vw,22px);max-width:1280px;margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--red);letter-spacing:.06em;text-transform:uppercase}
+.eyebrow .t{background:var(--red);color:#fff;border-radius:6px;padding:2px 8px;letter-spacing:0}
+.eyebrow .min{margin-left:auto;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:600}
+.h{font-size:clamp(28px,4.2vw,52px);line-height:1.15;font-weight:800}
+.h .zh,.h.zh{font-family:var(--f-kai);font-weight:700}
+.lead{font-size:clamp(17px,1.8vw,22px);color:var(--muted);max-width:60ch;margin:0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.box{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:clamp(14px,1.8vw,22px);min-width:0}
+.box h3{font-size:clamp(18px,1.9vw,24px);margin-bottom:8px}
+.box ul,.box ol{margin:0;padding-left:22px;display:grid;gap:6px;font-size:clamp(16px,1.6vw,20px)}
+.big-zh{font-family:var(--f-kai);font-size:clamp(30px,4.6vw,58px);line-height:1.35}
+.mid-zh{font-family:var(--f-zh);font-size:clamp(20px,2.4vw,30px);line-height:1.6}
+.hl{background:var(--gold-t);box-shadow:inset 0 -.18em var(--gold);padding:0 .1em;border-radius:3px}
+.hl.b{background:var(--blue-t);box-shadow:inset 0 -.18em var(--blue)}
+.hl.r{background:var(--red-t);box-shadow:inset 0 -.18em var(--red)}
+.btn{border:0;border-radius:10px;padding:10px 18px;font-weight:700;background:var(--blue);color:#fff;font-size:16px}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn.red{background:var(--red)} .btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.say{border:1.5px solid var(--line);background:var(--card);border-radius:50%;width:38px;height:38px;display:inline-grid;place-items:center;flex:none;vertical-align:middle}
+.say svg{width:18px;height:18px}
+.tag{display:inline-block;border-radius:6px;padding:2px 8px;font-weight:700;font-size:13px}
+.tag.y{background:var(--gold-t);color:#7A5300} .tag.b{background:var(--blue-t);color:var(--blue)} .tag.g{background:var(--green-t);color:var(--green)} .tag.r{background:var(--red-t);color:var(--red)}
+
+/* title slide */
+.cover{justify-content:center}
+.cover .zhT{font-family:var(--f-kai);font-size:clamp(60px,11vw,150px);line-height:1;font-weight:700;color:var(--ink)}
+.cover .zhT b{color:var(--red);font-weight:700}
+.stamp{display:inline-block;border:3px solid var(--red);color:var(--red);border-radius:8px;padding:4px 14px;font-weight:800;transform:rotate(-3deg);font-size:clamp(14px,1.5vw,18px)}
+.cando{display:grid;gap:10px;counter-reset:c}
+.cando li{list-style:none;display:flex;gap:12px;align-items:baseline;font-size:clamp(17px,1.8vw,22px)}
+.cando li::before{counter-increment:c;content:counter(c);flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px}
+
+/* roles */
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:10px}
+.role{border-radius:12px;padding:14px;background:var(--card);border:1.5px solid var(--line)}
+.role .n{font-family:var(--f-kai);font-size:30px;font-weight:700}
+.role p{margin:4px 0 0;font-size:15px;color:var(--muted)}
+
+/* stand-up game */
+.stand{display:grid;place-items:center;text-align:center;gap:14px;padding:clamp(16px,3vw,40px);background:var(--card);border:1.5px solid var(--line);border-radius:18px}
+.stand .s{font-family:var(--f-kai);font-size:clamp(46px,9vw,120px);line-height:1.15}
+.stand .vi{font-size:clamp(17px,1.8vw,22px);color:var(--muted)}
+.counter{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+
+/* reveal sentences */
+.sent{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--card);border:1.5px solid var(--line);font-family:var(--f-zh);font-size:clamp(20px,2.4vw,30px);min-width:0}
+.sent .t{flex:1;min-width:0}
+.sent .k{display:none}
+.show-k .sent .k{display:inline;background:var(--gold-t);box-shadow:inset 0 -.18em var(--gold);border-radius:3px}
+.sent .k.on{display:inline}
+.formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--f-zh);font-size:clamp(20px,2.6vw,32px);font-weight:700}
+.formula span{padding:6px 14px;border-radius:10px;background:var(--card);border:2px solid var(--line)}
+.formula .key{border-color:var(--gold);background:var(--gold-t)}
+.formula .op{border:0;background:none;padding:0;color:var(--muted);font-weight:400}
+
+/* timeline */
+.tl{position:relative;height:120px;margin:10px 4px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:56px;height:4px;background:var(--ink);border-radius:2px}
+.tl .pt{position:absolute;top:44px;width:28px;height:28px;border-radius:50%;border:4px solid var(--ink);background:var(--card);transform:translateX(-50%)}
+.tl .pt.now{background:var(--red);border-color:var(--red)}
+.tl .lb{position:absolute;top:0;transform:translateX(-50%);font-weight:700;font-size:15px;white-space:nowrap}
+.tl .lb.bt{top:82px;font-family:var(--f-zh);color:var(--muted);font-weight:500}
+.tl .span{position:absolute;top:50px;height:16px;background:var(--gold);opacity:.55;border-radius:8px}
+.tl .spanlb{position:absolute;top:84px;transform:translateX(-50%);font-family:var(--f-zh);font-weight:700;color:#7A5300;white-space:nowrap}
+
+/* number tool */
+.numtool{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.numtool input{width:120px;font-size:32px;font-weight:700;text-align:center}
+.numout{font-family:var(--f-kai);font-size:clamp(40px,6vw,80px);font-weight:700;color:var(--blue)}
+
+/* vocab cards */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:10px}
+.vc{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center;min-height:150px;justify-content:center}
+.vc .hz{font-family:var(--f-kai);font-size:clamp(34px,3.6vw,46px);line-height:1.1}
+.vc .py{color:var(--blue);font-weight:700;font-size:17px}
+.vc .mn{font-size:15px;font-weight:600}
+.vc .ex{font-family:var(--f-zh);font-size:14px;color:var(--muted)}
+.vc.hide .py,.vc.hide .mn,.vc.hide .ex{visibility:hidden}
+.vc.hide{background:var(--gold-t);border-color:var(--gold)}
+
+/* question card + timer */
+.qcard{display:grid;place-items:center;text-align:center;gap:10px;padding:clamp(18px,3vw,36px);background:var(--card);border:2px dashed var(--blue);border-radius:18px}
+.qcard .q{font-family:var(--f-kai);font-size:clamp(40px,7vw,90px);line-height:1.2}
+.clock{font-size:clamp(44px,6vw,80px);font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.clock.low{color:var(--red)}
+
+/* topics */
+.topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px}
+.topic{border-radius:14px;padding:14px;border:2px solid var(--line);background:var(--card);display:grid;gap:4px}
+.topic .no{font-weight:800;color:var(--red)}
+.topic .n{font-family:var(--f-kai);font-size:28px;font-weight:700}
+.topic .w{font-family:var(--f-zh);font-size:16px;color:var(--muted)}
+.topic .who{font-weight:700;color:var(--blue);min-height:1.3em}
+.topic.picked{border-color:var(--blue);background:var(--blue-t)}
+
+/* degree scale */
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.scale .lv{border-radius:12px;padding:10px 8px;text-align:center;display:grid;gap:2px;background:var(--card);border:2px solid var(--line)}
+.scale .lv b{font-size:28px;font-weight:800;line-height:1}
+.scale .lv span{font-size:clamp(16px,2vw,24px);font-weight:700}
+.scale .lv i{font-style:normal;font-size:13px;color:var(--muted)}
+.scale .lv:nth-child(1){border-color:#C9D6E3}.scale .lv:nth-child(2){border-color:#9FBAD6}.scale .lv:nth-child(3){border-color:var(--gold)}.scale .lv:nth-child(4){border-color:#E07A5F}.scale .lv:nth-child(5){border-color:var(--red);background:var(--red-t)}
+@media (max-width:640px){.scale .lv i{display:none}}
+
+/* topic tabs */
+.chip-t{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font-weight:700}
+.chip-t[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* bingo */
+.bingo{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.bingo>span{border:1.5px solid var(--line);border-radius:10px;padding:8px;text-align:center;font-size:clamp(14px,1.5vw,18px);background:var(--card)}
+.bingo>span.on{background:var(--gold-t);border-color:var(--gold);font-weight:700}
+/* errors */
+.err{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 14px;border-radius:12px;background:var(--card);border:1.5px solid var(--line)}
+.err .w{font-family:var(--f-zh);font-size:clamp(20px,2.3vw,28px);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:3px}
+.err .r{font-family:var(--f-zh);font-size:clamp(20px,2.3vw,28px);color:var(--green);font-weight:700;grid-column:1/-1}
+.err .why{grid-column:1/-1;color:var(--muted);font-size:15px}
+
+/* frames */
+.frame{font-family:var(--f-zh);font-size:clamp(20px,2.4vw,30px);line-height:1.8;background:var(--card);border-left:6px solid var(--blue);border-radius:0 12px 12px 0;padding:12px 18px}
+.blank{display:inline-block;min-width:3.5em;border-bottom:3px solid var(--ink);margin:0 4px}
+
+/* guess game */
+.guess{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px}
+.gt{border-radius:12px;padding:12px;border:2px solid var(--c);background:var(--card);display:grid;gap:6px}
+.gt .n{font-weight:800;color:var(--c)}
+.gt input{width:100%;font-size:26px;font-weight:800;text-align:center}
+.gt.win{background:var(--green-t);border-color:var(--green)}
+
+/* bottom bar */
+.bot{position:fixed;inset:auto 0 0;z-index:20;background:var(--card);border-top:1.5px solid var(--line);
+  padding:8px max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 8px) max(16px,env(safe-area-inset-left,0px));
+  display:flex;align-items:center;gap:8px}
+.bot .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted);min-width:64px;text-align:center}
+.bot .tools{margin-left:auto;display:flex;gap:6px}
+.mini-clock{font-weight:800;font-variant-numeric:tabular-nums;padding:6px 10px;border-radius:8px;background:var(--paper);min-width:70px;text-align:center}
+.mini-clock.run{background:var(--gold-t)} .mini-clock.low{background:var(--red-t);color:var(--red)}
+
+/* drawers */
+.drawer{position:fixed;z-index:30;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 72px);width:min(420px,calc(100vw - 24px));max-height:calc(100% - 140px);overflow:auto;
+  background:var(--card);border:1.5px solid var(--line);border-radius:16px;box-shadow:0 12px 40px rgba(27,36,48,.18);padding:16px;display:grid;gap:12px}
+.drawer h3{font-size:18px;display:flex;align-items:center}
+.drawer h3 button{margin-left:auto;border:0;background:none;font-size:22px;line-height:1}
+.teams{display:grid;gap:8px}
+.team{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:8px;align-items:center;border-radius:10px;padding:6px 8px;border:2px solid var(--c)}
+.team .dot{width:14px;height:14px;border-radius:50%;background:var(--c)}
+.team input{border:0;padding:2px 4px;min-width:0;font-weight:700;background:transparent}
+.team .p{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;min-width:40px;text-align:center;color:var(--c)}
+.team.lead{background:var(--gold-t)}
+.pick{font-size:96px;font-weight:800;text-align:center;color:var(--red);font-variant-numeric:tabular-nums;line-height:1}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.dclock{font-size:64px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;line-height:1}
+.dclock.low{color:var(--red)}
+
+/* menu */
+.menu{display:grid;gap:4px}
+.menu button{text-align:left;border:0;background:none;padding:6px 8px;border-radius:8px;display:flex;gap:8px}
+.menu button:hover{background:var(--paper)}
+.menu button[aria-current="true"]{background:var(--blue-t);font-weight:700}
+.menu .mt{color:var(--red);font-weight:800;font-size:13px;margin-top:6px}
+
+.bot .btn,.mini-clock{white-space:nowrap}
+.mlbl{display:none}
+@media (max-width:640px){.top .brand{display:none}.bot .lbl{display:none}.mlbl{display:inline}.bot{gap:4px}.bot .tools{gap:4px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="brand">我們這一班</div>
+  <nav class="tiets" id="tiets" aria-label="Chuyển nhanh theo tiết"></nav>
+</header>
+<div class="prog" aria-hidden="true"><i id="progbar"></i></div>
+
+<main class="stage" id="stage">
+
+<!-- ===== TIẾT 1 ===== -->
+<section class="slide cover" data-tiet="1" data-title="Mở đầu">
+  <span class="stamp">Buổi 1 · 6 tiết</span>
+  <div class="zhT">我們<b>這一班</b></div>
+  <p class="lead">Lớp mình là ai? Hôm nay cả lớp hỏi nhau về bản thân, gia đình, tính cách, rồi tự khảo sát và báo cáo về lớp mình.</p>
+  <div class="box">
+    <h3>Cuối buổi, em làm được:</h3>
+    <ol class="cando">
+      <li><span>Hỏi và trả lời về trải nghiệm: <span class="zh hl">你V過…嗎？ 我V過／我沒V過。</span></span></li>
+      <li><span>Nói mình đến Đài Loan, học tiếng Trung bao lâu: <span class="zh hl">我來臺灣三個月了。</span></span></li>
+      <li><span>Báo cáo số liệu: <span class="zh hl">有的…，有的… · 十幾個同學 · 二十多個同學</span></span></li>
+      <li><span>Dùng 20 từ A2 về bản thân và gia đình: <span class="zh hl">出生 · 母語 · 年紀 · 兄弟 · 害羞 · 擔心…</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="slide" data-tiet="1" data-title="10 câu hỏi + phiếu K">
+  <div class="eyebrow"><span class="t">Tiết 1</span> Khởi động ① · Trường lớp và làm thêm <span class="tag g">Phiếu K</span> <span class="min">15 phút · cá nhân</span></div>
+  <p class="lead">Cô hỏi, gọi 1–2 bạn trả lời to. Sau đó <b>cả lớp viết câu trả lời của mình</b> vào phiếu K, đúng số câu.</p>
+  <div class="qcard" style="border-color:var(--green)">
+    <div class="counter" id="k-n"></div>
+    <div class="q" id="k-q" style="font-size:clamp(32px,4.8vw,62px)"></div>
+    <div class="lead" id="k-vi" style="font-size:18px"></div>
+    <div class="frame" id="k-model" style="width:100%;text-align:left" hidden></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn ghost" id="k-prev">Câu trước</button>
+      <button class="btn red" id="k-call">Gọi số</button>
+      <button class="btn ghost" id="k-show">Khung trả lời</button>
+      <button class="btn" id="k-next">Câu tiếp</button>
+    </div>
+    <div class="row" style="justify-content:center"><span class="counter">Bạn được gọi:</span><span class="pick" id="k-num" style="font-size:48px">—</span><button class="btn sm ghost" data-timer="60">Bấm 1 phút viết</button></div>
+  </div>
+</section>
+
+<section class="slide" data-tiet="1" data-title="Nghe + phiếu A">
+  <div class="eyebrow"><span class="t">Tiết 1</span> Khởi động ② · Nghe và đáp <span class="tag y">Phiếu A</span> <span class="min">25 phút · cá nhân</span></div>
+  <p class="lead">Cả lớp <b>chỉ nghe</b>, không nhìn chữ. Cô gọi số, bạn đó trả lời trong 10 giây và hỏi lại <span class="zh">你呢？</span>. Sau đó nghe <b>câu mẫu</b> và <b>điền từ vào phiếu A</b>, đúng số câu.</p>
+  <div class="grid g2" style="align-items:stretch">
+    <div class="qcard" style="border-color:var(--red)">
+      <div class="counter">Số được gọi</div>
+      <div class="pick" id="qa-num">—</div>
+      <div class="clock" id="qa-clock">0:10</div>
+      <div class="row" style="justify-content:center"><button class="btn red" id="qa-go">Gọi số + bấm 10 giây</button></div>
+      <div class="counter" id="qa-left"></div>
+    </div>
+    <div class="qcard">
+      <div class="counter" id="qa-n" style="font-size:22px"></div>
+      <div class="row" style="justify-content:center;gap:14px">
+        <button class="btn" id="qa-say" style="font-size:22px;padding:18px 26px">▶ Nghe câu hỏi</button>
+        <button class="btn" id="qa-modelbtn" style="font-size:22px;padding:18px 26px;background:var(--gold);color:var(--ink)">▶ Nghe câu mẫu</button>
+      </div>
+      <div class="frame" id="qa-model" style="width:100%;text-align:left" hidden></div>
+      <div class="row" style="justify-content:center">
+        <button class="btn ghost" id="qa-prev">Câu trước</button>
+        <button class="btn ghost" id="qa-ans">Hiện đáp án</button>
+        <button class="btn ghost" id="qa-next">Câu tiếp</button>
+      </div>
+    </div>
+  </div>
+  <div class="box"><b>Khung từ trên phiếu A:</b> <span class="zh" id="qa-bank" style="font-size:20px"></span></div>
+</section>
+
+<section class="slide" data-tiet="1" data-title="Nối câu">
+  <div class="eyebrow"><span class="t">Tiết 1</span> Khởi động ③ · Nối câu <span class="min">10 phút · cá nhân</span></div>
+  <p class="lead">Lần lượt theo hàng. Mỗi bạn <b>nhắc lại câu của bạn ngay trước</b>, rồi <b>nói câu của mình</b>. Chủ đề: em sợ gì, lo gì, chưa từng làm gì.</p>
+  <div class="frame">
+    <span class="tag y">Bạn 1</span> 我很<span class="hl">害怕</span>狗。<br>
+    <span class="tag y">Bạn 2</span> <span style="color:var(--muted)">他很害怕狗，</span>我很<span class="hl">擔心</span>考試。<br>
+    <span class="tag y">Bạn 3</span> <span style="color:var(--muted)">她很擔心考試，</span>我<span class="hl">從來沒</span>坐過飛機。<br>
+    <span class="tag y">Bạn 4</span> <span style="color:var(--muted)">他從來沒坐過飛機，</span>我…
+  </div>
+  <div class="grid g3">
+    <div class="box"><p class="mid-zh" style="margin:0">我很<b>害怕</b>…</p></div>
+    <div class="box"><p class="mid-zh" style="margin:0">我很<b>擔心</b>…</p></div>
+    <div class="box"><p class="mid-zh" style="margin:0">我<b>從來沒</b>V<b>過</b>…</p></div>
+  </div>
+  <div class="row"><button class="btn" data-timer="600">Bấm giờ 10 phút</button></div>
+</section>
+
+<!-- ===== TIẾT 2 ===== -->
+<section class="slide" data-tiet="2" data-title="V過 · Ai trụ cuối cùng">
+  <div class="eyebrow"><span class="t">Tiết 2</span> Ngữ pháp ① · V過 · Ai đứng đến cuối? <span class="tag y">Phiếu B1 · phần 1</span> <span class="min">20 phút</span></div>
+  <div class="grid g2" style="align-items:start">
+    <div class="box"><h3>Luật chơi</h3><ul>
+      <li>Cả lớp <b>đứng dậy</b>.</li>
+      <li>Câu trên màn hình em <b>đã từng làm</b> → nói to <span class="zh hl">我V過！</span> rồi <b>ngồi xuống</b>.</li>
+      <li>Chưa từng → nói <span class="zh hl r">我沒V過。</span> và <b>tiếp tục đứng</b>.</li>
+      <li>Ai <b>đứng đến cuối cùng</b> là <b>provip</b>.</li>
+      <li>Song song: tick ✓ / ✗ vào bảng 20 câu ở phiếu B1 phần 1.</li></ul></div>
+    <div class="box"><h3>Công thức</h3>
+      <div class="formula"><span>V</span><span class="key">過</span><span class="op">·</span><span class="key">沒</span><span>V</span><span class="key">過</span><span class="op">·</span><span>V</span><span class="key">過</span><span>…</span><span class="key">嗎？</span></div>
+      <p class="lead" style="font-size:15px;margin:8px 0 0">Phủ định chỉ dùng 沒, không dùng 不, không thêm 了. Muốn nhấn mạnh: <span class="zh">我從來沒V過。</span></p></div>
+  </div>
+  <div class="qcard" style="border-color:var(--red)">
+    <div class="counter" id="nh-n" style="font-size:20px"></div>
+    <div class="q" id="nh-q" style="font-size:clamp(34px,5.4vw,68px)"></div>
+    <div id="nh-vi" style="font-size:clamp(18px,2.2vw,26px);color:var(--blue);font-weight:600"></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn ghost" id="nh-prev">Câu trước</button>
+      <button class="btn red" id="nh-ask">Cô hỏi: 誰…過？</button>
+      <button class="btn" id="nh-next">Câu tiếp</button>
+    </div>
+    <div class="mid-zh" id="nh-follow" hidden></div>
+  </div>
+  <div class="box" style="border-color:var(--gold);background:var(--gold-t)"><span class="tag y">Phiếu B1 · phần 1 · 3 câu</span> <b>Sau trò chơi: viết 3 câu thật về em</b><ol class="zh" style="font-size:clamp(17px,1.9vw,22px);margin-top:6px"><li>我＿＿過＿＿。</li><li>我＿＿過＿＿。</li><li>我從來沒＿＿過＿＿。</li></ol></div>
+</section>
+
+<section class="slide" data-tiet="2" data-title="Bao lâu rồi? 時量補語">
+  <div class="eyebrow"><span class="t">Tiết 2</span> Ngữ pháp ② <span class="tag y">Phiếu B1 · phần 2</span> <span class="min">15 phút</span></div>
+  <h2 class="h"><span class="zh">你來臺灣多久了？</span></h2>
+  <div class="box">
+    <div class="tl" aria-label="Trục thời gian: tháng 7 đến Đài Loan, tháng 10 là bây giờ">
+      <span class="lb" style="left:12%">Tháng 7</span><span class="pt" style="left:12%"></span><span class="lb bt" style="left:12%">來臺灣</span>
+      <span class="span" style="left:12%;width:70%"></span><span class="spanlb" style="left:47%">三個月</span>
+      <span class="lb" style="left:82%">Tháng 10</span><span class="pt now" style="left:82%"></span><span class="lb bt" style="left:82%">現在</span>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="box"><span class="tag y">Không có tân ngữ</span>
+      <div class="formula" style="margin-top:8px"><span>V</span><span class="key">thời gian</span><span class="key">了</span></div>
+      <p class="mid-zh" style="margin:8px 0 0">我來臺灣<span class="hl">三個月了</span>。</p></div>
+    <div class="box"><span class="tag y">Có tân ngữ: lặp động từ</span>
+      <div class="formula" style="margin-top:8px"><span>V</span><span>O</span><span>V</span><span class="key">了 + thời gian</span><span class="key">了</span></div>
+      <p class="mid-zh" style="margin:8px 0 0">我學中文<span class="hl">學了一年了</span>。</p></div>
+  </div>
+  <p class="lead">Chữ <b>了</b> cuối câu nghĩa là việc đó <b>vẫn đang tiếp diễn</b> đến bây giờ.</p>
+  <div class="box" style="border-color:var(--gold);background:var(--gold-t)"><span class="tag y">Phiếu B1 · phần 2</span> <b>Viết vào phiếu: khởi động + 3 câu thật về em</b><ol class="zh" style="font-size:clamp(17px,1.9vw,22px);margin-top:6px"><li>我來臺灣＿＿了。</li><li>我學中文學了＿＿了。</li><li>我在＿＿＿（中山工商 / 宿舍 / 高雄）＿＿了＿＿了。</li></ol><p class="lead" style="font-size:15px;margin:6px 0 0">Câu 3 ví dụ: <span class="zh">我住在宿舍住了兩個月了。</span></p></div>
+</section>
+
+<section class="slide" data-tiet="2" data-title="Báo cáo số liệu">
+  <div class="eyebrow"><span class="t">Tiết 2</span> Ngữ pháp ③ · Báo cáo số liệu <span class="tag y">Phiếu B1 · phần 3</span> <span class="min">10 phút</span></div>
+  <div class="grid g2">
+    <div class="box"><h3>Có bạn thì… có bạn thì…</h3>
+      <p class="mid-zh" style="margin:0">我們班的同學，<span class="hl b">有的</span>是在城市長大的，<span class="hl b">有的</span>是在鄉下長大的。</p>
+      <ul style="margin-top:10px"><li><span class="zh">大家都…</span> · tất cả đều</li><li><span class="zh">沒有人…</span> · không ai</li><li><span class="zh">一半</span> · một nửa</li></ul></div>
+    <div class="box"><h3>Đổi số thành cách nói ước lượng</h3>
+      <div class="numtool"><label for="num-in" class="lead" style="font-size:16px">Gõ một số</label><input id="num-in" type="number" min="1" max="99" value="23"><div class="numout" id="num-out"></div></div>
+      <p class="lead" style="font-size:15px;margin-top:8px">11–19 → <span class="zh">十幾</span> · 21–29 → <span class="zh">二十多 / 二十幾</span></p></div>
+  </div>
+  <div class="frame">我們班有 <span class="hl">十幾</span> 個同學有兄弟，<span class="hl">只有</span> 三個同學的母語不是越南語。</div>
+  <div class="box" style="border-color:var(--gold);background:var(--gold-t)"><span class="tag y">Phiếu B1 · phần 3</span> <b>Viết vào phiếu: đổi số + 3 câu về lớp mình</b><ol class="zh" style="font-size:clamp(17px,1.9vw,22px);margin-top:6px"><li>我們班的同學，有的＿＿，有的＿＿。</li><li>我們班有十幾／二十多個同學＿＿。</li><li>我們班的同學都＿＿。／我們班沒有人＿＿。</li></ol></div>
+</section>
+
+<section class="slide" data-tiet="2" data-title="Từ vựng A2 Buổi 1">
+  <div class="eyebrow"><span class="t">Tiết 2</span> Từ vựng A2 · 華語八千詞 基礎級 <span class="min">10 phút</span></div>
+  <div class="row"><h2 class="h" style="font-size:clamp(24px,3vw,38px)">20 từ dùng được</h2><span class="tag y" style="margin-left:auto">Phiếu · Trọng tâm</span></div>
+  <p class="lead" style="font-size:17px">Trên phiếu chỉ có pinyin và nghĩa. Nhìn bảng, <b>tìm chữ Hán khớp pinyin</b> và chép vào ô trống. Bấm thẻ để nghe.</p>
+  <div class="vgrid" id="vgrid"></div>
+  <div class="box"><div class="row"><h3 style="margin:0">43 từ nhận biết</h3><span class="lead" style="font-size:15px">Chỉ cần đọc hiểu, không bắt buộc dùng</span><button class="btn sm ghost" id="v-rest-t" style="margin-left:auto">Hiện danh sách</button></div>
+    <div id="v-rest" class="row" style="margin-top:10px" hidden></div></div>
+</section>
+
+<section class="slide" data-tiet="2" data-title="Mức độ 1–5">
+  <div class="eyebrow"><span class="t">Tiết 2</span> Phó từ chỉ mức độ · tô 1–5 <span class="tag y">Phiếu B2</span> <span class="min">15 phút</span></div>
+  <div class="scale" id="scale">
+    <div class="lv"><b>1</b><span class="zh">一點也不</span><i>hoàn toàn không</i></div>
+    <div class="lv"><b>2</b><span class="zh">不太</span><i>không lắm</i></div>
+    <div class="lv"><b>3</b><span class="zh">有一點 / 比較</span><i>hơi / khá</i></div>
+    <div class="lv"><b>4</b><span class="zh">很</span><i>rất</i></div>
+    <div class="lv"><b>5</b><span class="zh">非常</span><i>vô cùng</i></div>
+  </div>
+  <div class="qcard" style="border-color:var(--gold)">
+    <div class="counter" id="dg-n" style="font-size:20px"></div>
+    <div class="q" id="dg-q" style="font-size:clamp(38px,6vw,80px)"></div>
+    <div class="lead" id="dg-h" style="font-size:18px"></div>
+    <div class="row" style="justify-content:center">
+      <button class="btn ghost" id="dg-prev">Câu trước</button>
+      <button class="btn red" id="dg-call">Gọi số</button>
+      <span class="pick" id="dg-num" style="font-size:44px">—</span>
+      <button class="btn" id="dg-next">Câu tiếp</button>
+    </div>
+  </div>
+  <div class="box" style="border-color:var(--gold);background:var(--gold-t)"><b>Cách làm:</b> mỗi câu, em <b>tô một ô 1–5</b> trên phiếu B2, rồi quay sang bạn bên cạnh nói câu có phó từ: <span class="zh">我有一點害怕狗。</span> Cô gọi số một bạn nói to. <b>Lưu ý:</b> <span class="zh">有一點</span> dùng cho điều không mong muốn (<span class="zh">有一點累、有一點害怕</span>); điều tốt dùng <span class="zh">比較</span> (<span class="zh">比較開心</span>).</div>
+</section>
+
+<!-- ===== TIẾT 3 ===== -->
+<section class="slide" data-tiet="3" data-title="Nhiệm vụ cặp: 3 tháng ở Đài Loan">
+  <div class="eyebrow"><span class="t">Tiết 3</span> Nhiệm vụ nhỏ · theo cặp <span class="tag b">Phiếu C1</span> <span class="min">25 + 15 + 10 phút</span></div>
+  <h2 class="h">3 tháng ở Đài Loan của bạn thế nào?</h2>
+  <div class="grid g2">
+    <div class="box"><h3>Hỏi bạn bên cạnh 5 câu · ghi vào phiếu C1</h3>
+      <ol class="zh" style="font-size:clamp(18px,2vw,24px)" id="pair-q"></ol></div>
+    <div class="box"><h3>Rồi kể lại về bạn</h3>
+      <div class="frame" style="font-size:clamp(18px,2.1vw,26px)">他／她在臺灣<span class="blank"></span>過<span class="blank"></span>，在越南從來沒<span class="blank"></span>過。<br>
+      <span class="hl b">沒想到</span><span class="blank"></span>。<br>
+      他／她覺得臺灣和越南最大的<span class="hl">不同</span>是<span class="blank"></span>。<br>
+      他／她最開心的一天是<span class="blank"></span>。</div></div>
+  </div>
+  <div class="row"><button class="btn" data-timer="1500">Bấm giờ 25 phút</button><button class="btn ghost" data-timer="900">15 phút kể lại</button><button class="btn ghost" data-open="pick">Gọi 3–4 em lên kể</button></div>
+</section>
+
+<!-- ===== TIẾT 4 ===== -->
+<section class="slide" data-tiet="4" data-title="Chủ đề của em">
+  <div class="eyebrow"><span class="t">Tiết 4</span> Nhiệm vụ chính · cá nhân <span class="tag b">Phiếu C2</span> <span class="min">5 phút</span></div>
+  <h2 class="h">Bài nói của em: góc nhìn nào?</h2>
+  <p class="lead">Mỗi em một chủ đề, <b>chia theo số thứ tự</b>. Gõ số của em để xem chủ đề. Slide sau có 6 câu hỏi cho từng chủ đề.</p>
+  <div class="row"><label for="tp-in" class="lead" style="font-size:16px">Số thứ tự</label><input id="tp-in" type="number" min="1" max="60" style="width:100px;font-size:24px;font-weight:800;text-align:center"><span class="mid-zh" id="tp-out" style="font-weight:700"></span></div>
+  <div class="topics" id="topics"></div>
+</section>
+
+<section class="slide" data-tiet="4" data-title="6 câu hỏi + đoạn văn">
+  <div class="eyebrow"><span class="t">Tiết 4</span> Trả lời 6 câu, ghép thành đoạn <span class="tag b">Phiếu C2</span> <span class="min">20 + 20 + 5 phút</span></div>
+  <div class="row" id="qs-tabs" role="tablist" aria-label="Chọn chủ đề"></div>
+  <div class="grid g2">
+    <div class="box"><span class="tag y">Bước 1 · 20 phút</span><h3 style="margin-top:8px" id="qs-title"></h3>
+      <ol class="zh" id="qs-list" style="font-size:clamp(18px,2vw,23px)"></ol>
+      <p class="lead" style="font-size:15px">Trả lời từng câu bằng <b>một câu đầy đủ</b> vào phiếu C2, dòng 1–6.</p></div>
+    <div class="box"><span class="tag b">Bước 2 · 20 phút</span><h3 style="margin-top:8px">Ghép thành một đoạn theo mẫu</h3>
+      <div class="frame" style="font-size:clamp(17px,1.9vw,23px);line-height:1.9">大家好，我叫<span class="blank"></span>。<br>我的題目是「<span class="blank"></span>」。<br><span style="color:var(--muted)">（câu trả lời 1, 2, 3）</span><br><span class="hl">還有</span>，<span style="color:var(--muted)">（câu trả lời 4, 5）</span><br><span class="hl b">沒想到</span><span style="color:var(--muted)">（câu 6 hoặc điều bất ngờ）</span>！<br>謝謝大家！</div>
+      <p class="lead" style="font-size:15px">Dùng ít nhất <b>2 cấu trúc</b>: V過 · thời gian + 了 · 從來沒V過 · 有一點 / 很 / 非常 · 沒想到</p></div>
+  </div>
+  <div class="box"><div class="row"><h3 style="margin:0">Đoạn mẫu · chủ đề 三個月前的我</h3><button class="btn sm ghost" id="qs-sample-t" style="margin-left:auto">Hiện đoạn mẫu</button></div>
+    <p class="mid-zh" id="qs-sample" style="margin:10px 0 0;font-size:clamp(18px,2vw,24px)" hidden>大家好，我叫阿明。我的題目是「三個月前的我」。三個月前，我非常害怕說中文，上課的時候很害羞。我只會說「你好」和「謝謝」。現在我來臺灣三個月了，我會去夜市買東西，也會跟老師聊天。還有，以前我從來沒一個人坐過公車，現在我每天自己坐公車去學校。沒想到三個月以後，我有一點喜歡臺灣的生活了！謝謝大家！</p></div>
+  <div class="row"><button class="btn" data-timer="1200">Bước 1 · 20 phút</button><button class="btn" data-timer="1200">Bước 2 · 20 phút</button><button class="btn ghost" data-timer="300">Tập nói · 5 phút</button></div>
+</section>
+
+<!-- ===== TIẾT 5 ===== -->
+<section class="slide" data-tiet="5" data-title="Báo cáo">
+  <div class="eyebrow"><span class="t">Tiết 5</span> Báo cáo cá nhân · mỗi em 1 phút <span class="tag b">Phiếu C3</span> <span class="min">50 phút</span></div>
+  <h2 class="h">Đọc đoạn của em cho cả lớp</h2>
+  <div class="grid g2">
+    <div class="box"><h3>Người nói</h3><ul><li>Cô gọi số ngẫu nhiên, em đứng lên nói đoạn đã viết ở phiếu C2</li><li><b>Nhìn lớp, không đọc sát giấy</b></li><li>Tối đa 1 phút</li></ul>
+      <div class="row" style="margin-top:10px"><button class="btn" data-open="pick">Gọi số</button><button class="btn ghost" data-timer="60">Bấm 1 phút</button></div></div>
+    <div class="box"><h3>Người nghe · phiếu C3</h3><ul><li>Chọn <b>2 bạn</b> em thấy thú vị</li><li>Ghi tên bạn, chủ đề, và <b>một điều em nhớ</b> bằng câu: <span class="zh">他／她說…</span></li><li>Hết mỗi bài, cô hỏi nhanh 1 câu: <span class="zh">他是在哪裡長大的？</span></li></ul></div>
+  </div>
+</section>
+
+
+
+<!-- ===== TIẾT 6 ===== -->
+<section class="slide" data-tiet="6" data-title="聽寫 10 từ">
+  <div class="eyebrow"><span class="t">Tiết 6</span> 聽寫 · Nghe viết chữ Hán <span class="tag y">Phiếu D1</span> <span class="min">15 phút · cá nhân</span></div>
+  <p class="lead">Cô bấm nghe, mỗi từ đọc 2 lần. Em viết <b>chữ phồn thể</b> vào phiếu D1, đúng số câu. Xong 10 từ mới hiện đáp án để tự chữa.</p>
+  <div class="qcard" style="border-color:var(--gold)">
+    <div class="counter" id="dt-n" style="font-size:22px"></div>
+    <div class="row" style="justify-content:center"><button class="btn" id="dt-say" style="font-size:24px;padding:18px 30px">▶ Nghe</button></div>
+    <div class="row" style="justify-content:center"><button class="btn ghost" id="dt-prev">Từ trước</button><button class="btn ghost" id="dt-next">Từ tiếp</button></div>
+  </div>
+  <div class="row"><button class="btn red" id="dt-ans">Hiện đáp án 10 từ</button></div>
+  <div class="bingo" id="dt-list" hidden></div>
+</section>
+<section class="slide" data-tiet="6" data-title="Bingo từ vựng">
+  <div class="eyebrow"><span class="t">Tiết 6</span> Bingo từ vựng <span class="tag y">Phiếu D2</span> <span class="min">20 phút · cá nhân</span></div>
+  <p class="lead">Chọn <b>9 từ</b> trong 20 từ hôm nay, viết vào ô 3×3 ở phiếu D2. Cô hiện <b>nghĩa tiếng Việt</b>: em có từ đó thì khoanh tròn. Đủ 1 hàng thì hô <span class="zh">賓果！</span> và <b>nói một câu</b> có một từ trong hàng đó.</p>
+  <div class="qcard" style="border-color:var(--red)">
+    <div class="counter" id="bg-n"></div>
+    <div class="q" id="bg-q" style="font-family:var(--f-ui);font-weight:800;font-size:clamp(36px,6vw,76px)"></div>
+    <div class="row" style="justify-content:center"><button class="btn red" id="bg-next">Gọi nghĩa tiếp</button><button class="btn ghost" id="bg-reset">Chơi lại</button></div>
+  </div>
+  <div class="box"><h3>Đã gọi</h3><div class="bingo" id="bg-done"></div></div>
+</section>
+
+
+
+<section class="slide" data-tiet="6" data-title="Tổng kết">
+  <div class="eyebrow"><span class="t">Tiết 6</span> Tổng kết · vé ra về <span class="tag y">Phiếu D3</span> <span class="min">15 phút</span></div>
+  <h2 class="h">Muốn về, nói một câu!</h2>
+  <p class="lead">Cô gọi số. Bạn được gọi trả lời <b>một câu hỏi bất kỳ</b> dưới đây rồi mới được nộp phiếu. Trước đó, cả lớp đánh phiếu D3 tự đánh giá.</p>
+  <div class="grid g3">
+    <div class="box"><span class="tag y">V過</span><p class="mid-zh" style="margin:6px 0 0">你在臺灣看過醫生嗎？<br>你從來沒做過什麼？</p></div>
+    <div class="box"><span class="tag y">thời gian + 了</span><p class="mid-zh" style="margin:6px 0 0">你來臺灣多久了？<br>你學中文學了多久了？</p></div>
+    <div class="box"><span class="tag y">有的…有的… · mức độ</span><p class="mid-zh" style="margin:6px 0 0">我們班的同學怎麼樣？<br>你擔心考試嗎？</p></div>
+  </div>
+  <div class="row"><button class="btn red" data-open="pick">Gọi số</button></div>
+  <div class="box"><h3>Buổi sau</h3><p class="lead" style="margin:0"><b>怎麼去？</b> Đi lại ở Cao Hùng: phương tiện, chỉ đường.</p></div>
+</section>
+
+</main>
+
+<footer class="bot">
+  <button class="btn ghost sm" id="prev" aria-label="Slide trước">‹ <span class="lbl">Trước</span></button>
+  <span class="num" id="num"></span>
+  <button class="btn sm" id="next" aria-label="Slide sau"><span class="lbl">Sau</span> ›</button>
+  <button class="btn ghost sm" data-open="menu"><span class="lbl">Mục lục</span><span aria-hidden="true" class="mlbl">☰</span></button>
+  <div class="tools">
+    <button class="mini-clock" id="mini" data-open="timer" aria-label="Đồng hồ">--:--</button>
+    <button class="btn ghost sm" data-open="pick">Gọi số</button>
+  </div>
+</footer>
+
+<div class="drawer" id="d-timer" hidden>
+  <h3>Đồng hồ <button data-close aria-label="Đóng">×</button></h3>
+  <div class="dclock" id="dclock">0:00</div>
+  <div class="presets" id="presets"></div>
+  <div class="row"><button class="btn" id="tgo">Bắt đầu</button><button class="btn ghost" id="tpause">Tạm dừng</button><button class="btn ghost" id="tstop">Dừng</button></div>
+</div>
+<div class="drawer" id="d-pick" hidden>
+  <h3>Gọi số ngẫu nhiên <button data-close aria-label="Đóng">×</button></h3>
+  <div class="row"><label for="pmax" class="lead" style="font-size:14px">Sĩ số</label><input id="pmax" type="number" min="2" max="60" value="30" style="width:90px">
+    <label class="lead" style="font-size:14px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="pnorep" checked style="width:auto"> Không gọi trùng</label></div>
+  <div class="pick" id="pnum">—</div>
+  <div class="row"><button class="btn red" id="pgo" style="flex:1">Gọi số</button><button class="btn ghost sm" id="preset">Làm lại</button></div>
+  <p class="lead" style="font-size:13px" id="pleft"></p>
+</div>
+<div class="drawer" id="d-menu" hidden>
+  <h3>Mục lục <button data-close aria-label="Đóng">×</button></h3>
+  <div class="menu" id="menu"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem("b1-"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("b1-"+k,JSON.stringify(v))}catch(e){}}};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+let VOICE=null;function pv(){try{const v=speechSynthesis.getVoices();VOICE=v.find(x=>/zh[-_]TW/i.test(x.lang))||v.find(x=>/^zh/i.test(x.lang))||null}catch(e){}}
+try{pv();speechSynthesis.onvoiceschanged=pv}catch(e){}
+function speak(t){try{const u=new SpeechSynthesisUtterance(t);u.lang="zh-TW";u.rate=.85;if(VOICE)u.voice=VOICE;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+let AC=null;function beep(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(t=>{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=880;o.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(.25,AC.currentTime+t);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+t+.3);o.start(AC.currentTime+t);o.stop(AC.currentTime+t+.3)})}catch(e){}}
+$$(".say").forEach(b=>b.innerHTML=SPK);
+
+/* ---------- slides ---------- */
+const slides=$$(".slide");let cur=0;
+const TIET=[1,2,3,4,5,6];
+$("#tiets").innerHTML=TIET.map(t=>`<button data-t="${t}">Tiết ${t}</button>`).join("");
+$$("#tiets button").forEach(b=>b.onclick=()=>go(slides.findIndex(s=>s.dataset.tiet==b.dataset.t)));
+$("#menu").innerHTML=TIET.map(t=>`<div class="mt">TIẾT ${t}</div>`+slides.map((s,i)=>s.dataset.tiet==t?`<button data-i="${i}"><span class="counter">${i+1}</span>${esc(s.dataset.title)}</button>`:"").join("")).join("");
+$$("#menu button").forEach(b=>b.onclick=()=>{go(+b.dataset.i);closeAll()});
+function go(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,j)=>s.hidden=j!==cur);
+  $("#stage").scrollTop=0;
+  $("#num").textContent=`${cur+1} / ${slides.length}`;
+  $("#progbar").style.width=((cur+1)/slides.length*100)+"%";
+  const t=slides[cur].dataset.tiet;
+  $$("#tiets button").forEach(b=>b.setAttribute("aria-current",b.dataset.t==t?"true":"false"));
+  $$("#menu button").forEach(b=>b.setAttribute("aria-current",+b.dataset.i===cur?"true":"false"));
+  $("#prev").disabled=cur===0;$("#next").disabled=cur===slides.length-1;
+  store.set("slide",cur);
+}
+$("#prev").onclick=()=>go(cur-1);$("#next").onclick=()=>go(cur+1);
+document.addEventListener("keydown",e=>{
+  if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();go(cur+1)}
+  else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(cur-1)}
+  else if(e.key==="Escape")closeAll();
+});
+
+/* ---------- drawers ---------- */
+function closeAll(){$$(".drawer").forEach(d=>d.hidden=true)}
+$$("[data-open]").forEach(b=>b.addEventListener("click",()=>{const d=$("#d-"+b.dataset.open),was=d.hidden;closeAll();d.hidden=!was}));
+$$("[data-close]").forEach(b=>b.onclick=closeAll);
+
+/* ---------- timer ---------- */
+let tLeft=0,tTot=0,tInt=null;
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function tDraw(){
+  $("#dclock").textContent=fmt(tLeft);$("#mini").textContent=tTot?fmt(tLeft):"--:--";
+  const low=tTot&&tLeft<=Math.min(60,tTot*.15);
+  $("#dclock").classList.toggle("low",!!low);$("#mini").classList.toggle("low",!!low&&!!tInt);$("#mini").classList.toggle("run",!!tInt&&!low);
+}
+function tStart(sec){if(sec!=null){tTot=sec;tLeft=sec}if(!tTot)return;clearInterval(tInt);
+  tInt=setInterval(()=>{tLeft--;if(tLeft<=0){tLeft=0;clearInterval(tInt);tInt=null;beep()}tDraw()},1000);tDraw()}
+$("#presets").innerHTML=[30,60,120,300,600,900,1500,1800].map(s=>`<button class="btn ghost sm" data-p="${s}">${s<60?s+" giây":s/60+" phút"}</button>`).join("");
+$$("[data-p]").forEach(b=>b.onclick=()=>{tTot=+b.dataset.p;tLeft=tTot;clearInterval(tInt);tInt=null;tDraw()});
+$("#tgo").onclick=()=>tStart(tLeft>0?null:tTot);
+$("#tpause").onclick=()=>{clearInterval(tInt);tInt=null;tDraw()};
+$("#tstop").onclick=()=>{clearInterval(tInt);tInt=null;tLeft=tTot;tDraw()};
+$$("[data-timer]").forEach(b=>b.onclick=()=>{tStart(+b.dataset.timer);closeAll();$("#d-timer").hidden=false});
+tDraw();
+
+
+/* ---------- picker ---------- */
+let pool=[];
+function pReset(){const n=Math.max(2,Math.min(60,+$("#pmax").value||30));pool=Array.from({length:n},(_,i)=>i+1);$("#pnum").textContent="—";pLeft()}
+function pLeft(){$("#pleft").textContent=$("#pnorep").checked?`Còn ${pool.length} số chưa gọi`:""}
+$("#pmax").onchange=()=>{pReset();if(window.qaLeft)qaLeft()};$("#preset").onclick=()=>{pReset();if(window.qaLeft)qaLeft()};$("#pnorep").onchange=pLeft;
+$("#pgo").onclick=()=>{const n=Math.max(2,Math.min(60,+$("#pmax").value||30));if($("#pnorep").checked&&!pool.length)pReset();
+  let c=0;const iv=setInterval(()=>{$("#pnum").textContent=1+Math.floor(Math.random()*n);if(++c>12){clearInterval(iv);
+    let v;if($("#pnorep").checked){v=pool.splice(Math.floor(Math.random()*pool.length),1)[0]}else v=1+Math.floor(Math.random()*n);
+    $("#pnum").textContent=v;pLeft()}},55)};
+pReset();
+
+/* ---------- stand-up game ---------- */
+const KQ=[["你是哪一年來臺灣的？", "Em sang Đài Loan năm nào?", "我是二〇＿＿年來臺灣的。"], ["你來臺灣多久了？", "Em sang Đài Loan bao lâu rồi?", "我來臺灣＿＿了。"], ["你在中山工商念什麼科？", "Em học ngành gì ở trường 中山工商?", "我念＿＿科。"], ["你們班大概有多少個同學？", "Lớp em khoảng bao nhiêu bạn?", "我們班大概有＿＿個同學。"], ["你們班的同學是從哪裡來的？", "Các bạn lớp em đến từ đâu?", "我們班的同學，有的是從＿＿來的，有的是從＿＿來的。"], ["臺灣的學校和越南的學校有什麼不同？", "Trường ở Đài Loan khác trường ở Việt Nam thế nào?", "臺灣的學校＿＿，越南的學校＿＿。"], ["上課的時候，你害羞嗎？你敢問老師問題嗎？", "Trong giờ học em có ngại không? Có dám hỏi thầy cô không?", "上課的時候，我＿＿害羞，我＿＿問老師問題。"], ["你最擔心哪一門課？為什麼？", "Em lo môn nào nhất? Vì sao?", "我最擔心＿＿課，因為＿＿。"], ["你在臺灣打過工嗎？在哪裡？", "Em đã từng làm thêm ở Đài Loan chưa? Ở đâu?", "我在＿＿打過工。／我還沒打過工。"], ["在臺灣，什麼事讓你最開心？", "Ở Đài Loan, điều gì làm em vui nhất?", "在臺灣，我最開心的是＿＿。"]];
+let kk=0;
+function kDraw(){const q=KQ[kk];$("#k-q").textContent=q[0];$("#k-vi").textContent=q[1];$("#k-n").textContent=`Phiếu K · câu ${kk+1} / ${KQ.length}`;$("#k-model").hidden=true;$("#k-model").textContent="K"+(kk+1)+". "+q[2];$("#k-prev").disabled=kk===0;$("#k-next").disabled=kk===KQ.length-1}
+$("#k-next").onclick=()=>{kk++;kDraw()};$("#k-prev").onclick=()=>{kk--;kDraw()};
+$("#k-show").onclick=()=>{$("#k-model").hidden=!$("#k-model").hidden};
+$("#k-call").onclick=()=>{const n=Math.max(2,Math.min(60,+$("#pmax").value||30));if(!pool.length)pReset();let c=0;const iv=setInterval(()=>{$("#k-num").textContent=1+Math.floor(Math.random()*n);if(++c>12){clearInterval(iv);const v=pool.splice(Math.floor(Math.random()*pool.length),1)[0];$("#k-num").textContent=v;pLeft();if(window.qaLeft)qaLeft()}},55)};
+kDraw();
+
+
+/* ---------- quick Q&A ---------- */
+const QA=[["你是哪一年出生的？", "我是二〇〇九年＿＿＿的。", "出生"], ["你的母語是什麼？", "我的＿＿＿是越南語。", "母語"], ["你有哥哥姐姐嗎？他比你大幾歲？", "我哥哥的＿＿＿比我大，他今年十九歲。", "年紀"], ["你有兄弟姐妹嗎？", "我有兩個＿＿＿，他們都在越南。", "兄弟"], ["第一次見面的時候，你會害羞嗎？", "她很＿＿＿，第一次見面的時候臉都紅了。", "害羞"], ["你害怕什麼？", "我妹妹很＿＿＿狗，看見狗就跑。", "害怕"], ["你媽媽常常打電話給你嗎？", "媽媽很＿＿＿我，常常打電話問我好不好。", "擔心"], ["你去過臺北嗎？", "我＿＿＿沒去過臺北。", "從來"]];
+let qak=0,qaInt=null;
+function qaDraw(){$("#qa-n").textContent=`Phiếu A · câu ${qak+1} / ${QA.length}`;$("#qa-model").hidden=true;$("#qa-prev").disabled=qak===0;$("#qa-next").disabled=qak===QA.length-1}
+$("#qa-bank").textContent="出生 · 母語 · 年紀 · 兄弟 · 害羞 · 害怕 · 擔心 · 從來 · 認真 · 開心 · 長大 · 半夜";
+$("#qa-next").onclick=()=>{qak++;qaDraw()};$("#qa-prev").onclick=()=>{qak--;qaDraw()};
+$("#qa-say").onclick=()=>speak(QA[qak][0]);
+$("#qa-modelbtn").onclick=()=>{const q=QA[qak];speak(q[1].replace(/＿＿＿/,q[2]))};
+$("#qa-ans").onclick=()=>{const q=QA[qak];$("#qa-model").hidden=false;$("#qa-model").innerHTML=`<span class="counter">Câu hỏi:</span> ${esc(q[0])}<br>A${qak+1}. `+esc(q[1]).replace("＿＿＿",`<span class="hl">${q[2]}</span>`)};
+function qaLeft(){$("#qa-left").textContent=`Còn ${pool.length} bạn chưa được gọi`}
+$("#qa-go").onclick=()=>{const n=Math.max(2,Math.min(60,+$("#pmax").value||30));if(!pool.length)pReset();
+  clearInterval(qaInt);let c=0;const iv=setInterval(()=>{$("#qa-num").textContent=1+Math.floor(Math.random()*n);if(++c>12){clearInterval(iv);
+    const v=pool.splice(Math.floor(Math.random()*pool.length),1)[0];$("#qa-num").textContent=v;pLeft();qaLeft();
+    let left=10;$("#qa-clock").textContent="0:10";$("#qa-clock").classList.remove("low");speak(QA[qak][0]);
+    qaInt=setInterval(()=>{left--;$("#qa-clock").textContent=fmt(Math.max(left,0));$("#qa-clock").classList.toggle("low",left<=3);if(left<=0){clearInterval(qaInt);qaInt=null;beep()}},1000)}},55)};
+qaDraw();qaLeft();
+
+
+/* ---------- 誰V過 ---------- */
+const NH=[["我跟喜歡的人告白過。", "Wǒ gēn xǐhuān de rén gàobái guo."], ["我被別人告白過。", "Wǒ bèi biérén gàobái guo."], ["我半夜偷吃過室友的東西。", "Wǒ bànyè tōuchī guo shìyǒu de dōngxi."], ["我被狗追過。", "Wǒ bèi gǒu zhuī guo."], ["我被室友罵過。", "Wǒ bèi shìyǒu mà guo."], ["我在臺灣迷路過。", "Wǒ zài Táiwān mílù guo."], ["我在臺灣弄丟過鑰匙。", "Wǒ zài Táiwān nòngdiū guo yàoshi."], ["我在臺灣坐錯過公車。", "Wǒ zài Táiwān zuòcuò guo gōngchē."], ["我在夜市排隊排過一個小時。", "Wǒ zài yèshì páiduì pái guo yí ge xiǎoshí."], ["我自己一個人去過夜市。", "Wǒ zìjǐ yí ge rén qù guo yèshì."], ["我一天喝過三杯珍珠奶茶。", "Wǒ yì tiān hē guo sān bēi zhēnzhū nǎichá."], ["我用Google翻譯跟臺灣人聊過天。", "Wǒ yòng Google fānyì gēn Táiwān rén liáo guo tiān."], ["我被臺灣阿姨叫過「帥哥」或「美女」。", "Wǒ bèi Táiwān āyí jiào guo “shuàigē” huò “měinǚ”."], ["我在臺灣看過醫生。", "Wǒ zài Táiwān kàn guo yīshēng."], ["我在臺灣騎過YouBike。", "Wǒ zài Táiwān qí guo YouBike."], ["我上課遲到過。", "Wǒ shàngkè chídào guo."], ["我假裝聽懂過老師說的話。", "Wǒ jiǎzhuāng tīngdǒng guo lǎoshī shuō de huà."], ["我上課的時候偷偷玩過手機。", "Wǒ shàngkè de shíhou tōutōu wán guo shǒujī."], ["我在上課的時候睡著過。", "Wǒ zài shàngkè de shíhou shuìzháo guo."], ["我吃過臭豆腐。", "Wǒ chī guo chòudòufu."]];let nk=0;
+function nhDraw(){const q=NH[nk];$("#nh-n").textContent=`Câu ${nk+1} / ${NH.length} · phiếu B1 dòng ${nk+1}`;$("#nh-q").textContent=q[0];$("#nh-vi").textContent=q[1];$("#nh-follow").hidden=true;$("#nh-prev").disabled=nk===0;$("#nh-next").disabled=nk===NH.length-1}
+$("#nh-next").onclick=()=>{nk++;nhDraw()};$("#nh-prev").onclick=()=>{nk--;nhDraw()};
+$("#nh-ask").onclick=()=>{const q=NH[nk][0].replace(/^我/,"誰").replace(/。$/,"？");const f=$("#nh-follow");f.hidden=false;f.innerHTML=`<b>${esc(q)}</b><br><span style="font-size:.8em;color:var(--muted)">Hỏi thêm bạn vừa ngồi xuống: 什麼時候？在哪裡？那時候你覺得怎麼樣？</span>`};
+nhDraw();
+
+/* ---------- number tool ---------- */
+const D=["","一","二","三","四","五","六","七","八","九"];
+function approx(n){if(n<=10)return n===10?"十":D[n];const t=Math.floor(n/10),u=n%10,tz=(t===1?"十":D[t]+"十");
+  if(u===0)return tz+" (đúng "+n+")";return t===1?"十幾":tz+"多 · "+tz+"幾"}
+function numDraw(){const n=Math.max(1,Math.min(99,Math.round(+$("#num-in").value||1)));$("#num-out").textContent=approx(n)}
+$("#num-in").oninput=numDraw;numDraw();
+
+/* ---------- vocab ---------- */
+const VOC=[["出生", "chūshēng", "sinh ra", "我是二〇〇九年出生的。"], ["母語", "mǔyǔ", "tiếng mẹ đẻ", "我的母語是越南語。"], ["年紀", "niánjì", "tuổi tác", "我哥哥的年紀比我大。"], ["父母", "fùmǔ", "bố mẹ", "我的父母都在越南。"], ["兄弟", "xiōngdì", "anh em trai", "我有兩個兄弟。"], ["身高", "shēngāo", "chiều cao", "你的身高是多少？"], ["長大", "zhǎngdà", "lớn lên", "我是在鄉下長大的。"], ["認真", "rènzhēn", "chăm chỉ, nghiêm túc", "她上課很認真。"], ["害羞", "hàixiū", "ngại ngùng, mắc cỡ", "他很害羞，不太說話。"], ["開心", "kāixīn", "vui vẻ", "今天我很開心！"], ["擔心", "dānxīn", "lo lắng", "媽媽很擔心我。"], ["害怕", "hàipà", "sợ", "我很害怕狗。"], ["心情", "xīnqíng", "tâm trạng", "你今天心情怎麼樣？"], ["不同", "bùtóng", "khác nhau", "我們的母語不同。"], ["剛才", "gāngcái", "vừa nãy", "我剛才吃了早餐。"], ["半夜", "bànyè", "nửa đêm", "我昨天半夜才睡覺。"], ["從來", "cónglái", "từ trước đến nay", "我從來沒去過臺北。"], ["大概", "dàgài", "khoảng, chắc là", "我們班大概有二十個人。"], ["結果", "jiéguǒ", "kết quả là, rốt cuộc", "我想去，結果下雨了。"], ["沒想到", "méi xiǎngdào", "không ngờ", "沒想到他有五個兄弟！"]];
+const VREST=[["住址", "zhùzhǐ", "địa chỉ nhà"], ["表", "biǎo", "đồng hồ đeo tay"], ["鐘", "zhōng", "giờ (三點鐘)"], ["時鐘", "zhōng/shízhōng", "đồng hồ treo tường"], ["傳真", "chuánzhēn", "fax"], ["白天", "báitiān", "ban ngày"], ["夜晚", "yèwǎn", "buổi tối, ban đêm"], ["日子", "rìzi", "ngày, những ngày sống"], ["夜", "yè", "đêm"], ["春季", "chūnjì", "mùa xuân"], ["時", "shí", "lúc, khi"], ["不久", "bùjiǔ", "không lâu"], ["早點", "zǎodiǎn", "sớm một chút"], ["正好", "zhènghǎo", "vừa đúng lúc"], ["男人", "nánrén", "đàn ông"], ["女人", "nǚrén", "phụ nữ"], ["父親", "fùqīn", "cha"], ["母親", "mǔqīn", "mẹ"], ["外公", "wàigōng", "ông ngoại"], ["外婆", "wàipó", "bà ngoại"], ["伯伯", "bóbo/bó", "bác (anh của bố)"], ["伯父", "bófù", "bác trai"], ["伯母", "bómǔ", "bác gái"], ["叔叔", "shúshu/shú", "chú"], ["姑姑", "gūgu", "cô (chị em gái của bố)"], ["孫女", "sūnnǚ", "cháu gái"], ["孫子", "sūnzi", "cháu trai"], ["關係", "guānxì", "quan hệ"], ["傷心", "shāngxīn", "buồn, đau lòng"], ["美麗", "měilì", "xinh đẹp"], ["帥", "shuài", "đẹp trai"], ["笨", "bèn", "ngốc"], ["敢", "gǎn", "dám"], ["急", "jí", "vội, sốt ruột"], ["禮貌", "lǐmào", "lễ phép"], ["關心", "guānxīn", "quan tâm"], ["幸福", "xìngfú", "hạnh phúc"], ["差", "chà / chā", "kém"], ["阿姨", "āyí", "dì, cô"], ["身邊", "shēnbiān", "bên cạnh"], ["其實", "qíshí", "thật ra"], ["其中", "qízhōng", "trong đó"], ["左右", "zuǒyòu", "khoảng, chừng"]];
+$("#vgrid").innerHTML=VOC.map((v,i)=>`<button class="vc" data-v="${i}"><span class="hz">${v[0]}</span><span class="py">${v[1]}</span></button>`).join("");
+$$(".vc").forEach(c=>c.onclick=()=>{speak(VOC[c.dataset.v][0])});
+$("#v-rest").innerHTML=VREST.map(v=>`<span class="tag b" style="font-size:16px;font-weight:500"><span class="zh" style="font-weight:700">${v[0]}</span> ${v[1]}</span>`).join("");
+$("#v-rest-t").onclick=()=>{const r=$("#v-rest");r.hidden=!r.hidden;$("#v-rest-t").textContent=r.hidden?"Hiện danh sách":"Ẩn danh sách"};
+
+/* ---------- circle game ---------- */
+const DG=[["你害羞嗎？", "我一點也不害羞／我有一點害羞／我很害羞。"], ["你上課認真嗎？", "我上課不太認真／我上課比較認真／我上課非常認真。"], ["你今天開心嗎？", "我今天比較開心／我今天很開心。"], ["你擔心考試嗎？", "我不太擔心／我有一點擔心／我非常擔心考試。"], ["你害怕狗嗎？", "我一點也不害怕狗／我很害怕狗。"], ["你覺得中文難嗎？", "我覺得中文有一點難／很難。"], ["你覺得高雄熱嗎？", "我覺得高雄非常熱。"], ["你覺得上課累嗎？", "我覺得上課不太累／有一點累。"]];
+let dk=0;
+function dgDraw(){const q=DG[dk];$("#dg-q").textContent=q[0];$("#dg-h").textContent="Ví dụ: "+q[1];$("#dg-n").textContent=`Phiếu B2 · câu ${dk+1} / ${DG.length}`;$("#dg-prev").disabled=dk===0;$("#dg-next").disabled=dk===DG.length-1;$("#dg-num").textContent="—"}
+$("#dg-next").onclick=()=>{dk++;dgDraw()};$("#dg-prev").onclick=()=>{dk--;dgDraw()};
+$("#dg-call").onclick=()=>{const n=Math.max(2,Math.min(60,+$("#pmax").value||30));if(!pool.length)pReset();let c=0;const iv=setInterval(()=>{$("#dg-num").textContent=1+Math.floor(Math.random()*n);if(++c>12){clearInterval(iv);const v=pool.splice(Math.floor(Math.random()*pool.length),1)[0];$("#dg-num").textContent=v;pLeft();if(window.qaLeft)qaLeft()}},55)};
+dgDraw();
+
+/* ---------- pair questions ---------- */
+const PQ=["來臺灣以後，你做過什麼在越南從來沒做過的事？", "這三個月，什麼事讓你最沒想到？", "你在臺灣吃過最奇怪的東西是什麼？好吃嗎？", "你覺得臺灣的生活和越南的生活，最大的不同是什麼？", "這三個月，你最開心的一天是哪一天？那天你做了什麼？"];
+$("#pair-q").innerHTML=PQ.map((q,i)=>`<li>${q} <button class="say" data-pq="${i}" aria-label="Nghe">${SPK}</button></li>`).join("");
+$$("[data-pq]").forEach(b=>b.onclick=()=>speak(PQ[b.dataset.pq]));
+
+/* ---------- topics ---------- */
+const TOP=[["給新僑生的建議", "Lời khuyên cho 僑生 khóa sau", "來臺灣以前，應該準備什麼？"], ["三個月前的我", "Em của 3 tháng trước và bây giờ", "三個月前你最害怕什麼？現在呢？"], ["我眼中的臺灣", "Đài Loan trong mắt em", "臺灣人的什麼習慣讓你最沒想到？"], ["如果我是校長", "Nếu em là hiệu trưởng", "你最想改學校的什麼？"], ["我的完美週末", "Cuối tuần hoàn hảo với 1000 塊", "有一千塊和一個週末，你想做什麼？"], ["十年後的我", "Em của 10 năm sau", "十年後，你住在哪裡？做什麼？"]];
+const QS=[["來臺灣以前，新同學應該準備什麼？", "在臺灣，什麼事一定不能做？", "你最想介紹哪一個好吃又便宜的東西？", "哪一句中文，新同學一定要會說？", "新同學最可能擔心什麼？你會跟他說什麼？", "你來臺灣以後才知道的事是什麼？"], ["三個月前，你最害怕什麼？現在呢？", "三個月前，你會說哪些中文？現在呢？", "你剛來的時候，做過什麼好笑的事？", "你的生活有什麼不同了？", "有什麼事你以前從來沒做過，現在常常做？", "你想跟三個月前的自己說什麼？"], ["臺灣人的什麼習慣讓你最沒想到？", "臺灣和越南有什麼不同，你最喜歡？", "有什麼不同，你到現在還不習慣？", "你覺得臺灣人害羞嗎？為什麼？", "你在臺灣見過最奇怪的東西是什麼？", "如果臺灣朋友去越南，他們會覺得什麼最奇怪？"], ["如果你是中山工商的校長，你最想改什麼？", "你覺得學生幾點開始上課最好？", "上課的時候可以用手機嗎？為什麼？", "哪一門課你覺得不用上？為什麼？", "你會給僑生什麼幫助？", "你覺得當校長累不累？為什麼？"], ["如果你有一千塊和一個週末，你想做什麼？", "你想跟誰一起去？", "你想去哪裡？你去過那裡嗎？", "你要吃什麼、喝什麼？", "你會幾點起床、幾點睡覺？", "這個週末和你平常的週末有什麼不同？"], ["十年後，你住在哪裡？", "十年後，你在做什麼工作？", "那時候你會說幾種語言？", "你還會記得你的中文老師嗎？", "那時候，你最擔心什麼？", "你想跟十年後的自己說什麼？"]];
+$("#topics").innerHTML=TOP.map((t,i)=>{const nums=[];for(let k=i+1;k<=36;k+=6)nums.push(k);return `<div class="topic" data-ti="${i}"><span class="no">Chủ đề ${i+1} · số ${nums.join(", ")}…</span><span class="n">${t[0]}</span><b>${t[1]}</b><span class="w">${t[2]}</span></div>`}).join("");
+$("#tp-in").oninput=()=>{const n=+$("#tp-in").value;$$(".topic").forEach(e=>e.classList.remove("picked"));if(!n){$("#tp-out").textContent="";return}const i=(n-1)%6;$(`.topic[data-ti="${i}"]`).classList.add("picked");$("#tp-out").textContent=`→ Chủ đề ${i+1}: ${TOP[i][0]}`};
+
+/* ---------- question sets ---------- */
+let qsI=0;
+$("#qs-tabs").innerHTML=TOP.map((t,i)=>`<button class="chip-t" role="tab" data-qs="${i}">${i+1} · <span class="zh">${t[0]}</span></button>`).join("");
+function qsDraw(){$$("[data-qs]").forEach(b=>b.setAttribute("aria-selected",+b.dataset.qs===qsI?"true":"false"));$("#qs-title").innerHTML=`Chủ đề ${qsI+1} · <span class="zh">${TOP[qsI][0]}</span>`;$("#qs-list").innerHTML=QS[qsI].map(q=>`<li>${esc(q)}</li>`).join("")}
+$$("[data-qs]").forEach(b=>b.onclick=()=>{qsI=+b.dataset.qs;qsDraw()});
+$("#qs-sample-t").onclick=()=>{const e=$("#qs-sample");e.hidden=!e.hidden;$("#qs-sample-t").textContent=e.hidden?"Hiện đoạn mẫu":"Ẩn đoạn mẫu"};
+$("#tp-in").addEventListener("input",()=>{const n=+$("#tp-in").value;if(n){qsI=(n-1)%6;qsDraw()}});
+qsDraw();
+/* ---------- dictation ---------- */
+const DT=["出生","母語","年紀","兄弟","害羞","擔心","害怕","心情","認真","長大"];let dti=0;
+function dtDraw(){$("#dt-n").textContent=`Phiếu D1 · từ ${dti+1} / ${DT.length}`;$("#dt-prev").disabled=dti===0;$("#dt-next").disabled=dti===DT.length-1}
+$("#dt-say").onclick=()=>{const w=DT[dti];speak(w);setTimeout(()=>speak(w),1600)};
+$("#dt-next").onclick=()=>{dti++;dtDraw()};$("#dt-prev").onclick=()=>{dti--;dtDraw()};
+$("#dt-list").innerHTML=DT.map((w,i)=>`<span><b>${i+1}.</b> <span class="zh" style="font-size:24px">${w}</span></span>`).join("");
+$("#dt-ans").onclick=()=>{$("#dt-list").hidden=!$("#dt-list").hidden};
+dtDraw();
+/* ---------- bingo ---------- */
+let bgOrder=[],bgk=-1;
+function bgReset(){bgOrder=shuffle(VOC.map((_,i)=>i));bgk=-1;$("#bg-q").textContent="Bấm “Gọi nghĩa tiếp”";$("#bg-n").textContent="";$("#bg-done").innerHTML=""}
+$("#bg-next").onclick=()=>{if(bgk>=bgOrder.length-1)return;bgk++;const v=VOC[bgOrder[bgk]];$("#bg-q").textContent=v[2];$("#bg-n").textContent=`Nghĩa ${bgk+1} / ${VOC.length}`;
+  $("#bg-done").innerHTML=bgOrder.slice(0,bgk+1).map((i,j)=>(j===bgk?`<span class="on">?<br>${VOC[i][2]}</span>`:`<span><span class="zh">${VOC[i][0]}</span><br>${VOC[i][2]}</span>`)).join("")};
+$("#bg-reset").onclick=bgReset;bgReset();
+go(Math.min(store.get("slide",0),slides.length-1));
+</script>
+
+</body>
+</html>
